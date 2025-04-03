@@ -8,10 +8,13 @@ import com.event.backend.repository.EventRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,17 +40,18 @@ public class EventService {
     }
 
 
-    public List<EventDto> getAllEvents(){
-        List<Event> eventList = eventRepository.findAll();
-        List<EventDto> eventDtoList = new ArrayList<EventDto>();
+    public List<EventDto> getAllEvents(Pageable pageable) {
+        Page<Event> eventPage = eventRepository.findAll(pageable);
 
-        for(Event event : eventList){
-
+        // Convert the content of the Page<Event> to a List<EventDto>
+        List<EventDto> eventDtoList = new ArrayList<>();
+        for (Event event : eventPage.getContent()) {
             eventDtoList.add(convertToDto(event));
-
         }
+
         return eventDtoList;
     }
+
 
 
     //Add a new Event
@@ -59,6 +63,8 @@ public class EventService {
 
     //update event
     public ResponseDto updateEvent(long id,EventDto eventDto){
+
+        eventDto.setUpdatedAt(LocalDateTime.now());
         Optional<Event> event = eventRepository.findById(id);
 
         if(event.isPresent()){
@@ -98,6 +104,6 @@ public class EventService {
         }
 
     }
-    
+
 
 }
