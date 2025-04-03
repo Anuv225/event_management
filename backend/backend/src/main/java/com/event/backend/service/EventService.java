@@ -7,13 +7,10 @@ import com.event.backend.exception.EventNotFound;
 import com.event.backend.repository.EventRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +24,15 @@ public class EventService {
     EventRepository eventRepository;
 
 
-    public EventDto convertToDto(Event event){
+    public EventDto convertToDto(Event event) {
         EventDto eventDto = new EventDto();
-        BeanUtils.copyProperties(event,eventDto);
+        BeanUtils.copyProperties(event, eventDto);
         return eventDto;
     }
 
-    public Event convertToEntity(EventDto eventDto){
+    public Event convertToEntity(EventDto eventDto) {
         Event event = new Event();
-        BeanUtils.copyProperties(eventDto,event);
+        BeanUtils.copyProperties(eventDto, event);
         return event;
     }
 
@@ -53,53 +50,52 @@ public class EventService {
     }
 
 
-
     //Add a new Event
-    public ResponseDto addEvent(EventDto eventDto){
+    public ResponseDto addEvent(EventDto eventDto) {
         Event event = convertToEntity(eventDto);
         eventRepository.save(event);
         return new ResponseDto("Event added Successfully");
     }
 
     //update event
-    public ResponseDto updateEvent(long id,EventDto eventDto){
+    public ResponseDto updateEvent(long id, EventDto eventDto) {
 
         eventDto.setUpdatedAt(LocalDateTime.now());
         Optional<Event> event = eventRepository.findById(id);
 
-        if(event.isPresent()){
+        if (event.isPresent()) {
 
             Event eventEntity = event.get();
-            BeanUtils.copyProperties(eventDto,eventEntity);
+            BeanUtils.copyProperties(eventDto, eventEntity);
             eventEntity.setEventId(id);
             eventRepository.save(eventEntity);
             return new ResponseDto("Event updated Successfully");
-        }else{
+        } else {
             throw new EventNotFound("Event not found with id:" + id);
         }
 
     }
 
     //get a single event by id
-    public EventDto getEventById(long id){
+    public EventDto getEventById(long id) {
         Optional<Event> event = eventRepository.findById(id);
-        if(event.isPresent()){
+        if (event.isPresent()) {
             Event eventEntity = event.get();
             return convertToDto(eventEntity);
-        }else {
+        } else {
             throw new EventNotFound("Event not found with id: " + id);
         }
 
     }
 
     //get a single event by id
-    public ResponseDto deleteEventById(long id){
+    public ResponseDto deleteEventById(long id) {
         Optional<Event> event = eventRepository.findById(id);
-        if(event.isPresent()){
+        if (event.isPresent()) {
             Event eventEntity = event.get();
             eventRepository.delete(eventEntity);
             return new ResponseDto("Event deleted successfully with id: " + id);
-        }else {
+        } else {
             throw new EventNotFound("Event not found with id: " + id);
         }
 

@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-
 import java.util.List;
 
 @RestController
@@ -23,7 +22,7 @@ public class EventController {
     EventService eventService;
 
     @PostMapping
-    public ResponseEntity<ResponseDto> addTodo(@Valid @RequestBody EventDto eventDto){
+    public ResponseEntity<ResponseDto> addTodo(@Valid @RequestBody EventDto eventDto) {
 
         eventDto.setCreatedAt(LocalDateTime.now());
         eventDto.setUpdatedAt(LocalDateTime.now());
@@ -34,29 +33,29 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EventDto> getToById(@PathVariable Long id){
+    public ResponseEntity<EventDto> getToById(@PathVariable Long id) {
         EventDto eventDto = eventService.getEventById(id);
-        return new ResponseEntity<>(eventDto,HttpStatus.OK);
+        return new ResponseEntity<>(eventDto, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto> updateEvent(@PathVariable Long id, @Valid @RequestBody EventDto eventDto){
+    public ResponseEntity<ResponseDto> updateEvent(@PathVariable Long id, @Valid @RequestBody EventDto eventDto) {
 
-        ResponseDto response = eventService.updateEvent(id,eventDto);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+        ResponseDto response = eventService.updateEvent(id, eventDto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseDto> deleteEvent(@PathVariable Long id){
+    public ResponseEntity<ResponseDto> deleteEvent(@PathVariable Long id) {
         ResponseDto response = eventService.deleteEventById(id);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<EventDto>> getEventsPage(Pageable pageable){
+    public ResponseEntity<List<EventDto>> getEventsPage(Pageable pageable) {
         List<EventDto> eventDtoList = eventService.getAllEvents(pageable);
 
-        return new ResponseEntity<>(eventDtoList,HttpStatus.OK);
+        return new ResponseEntity<>(eventDtoList, HttpStatus.OK);
 
     }
 
