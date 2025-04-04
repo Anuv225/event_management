@@ -15,11 +15,14 @@ import java.util.Optional;
 @Service
 public class CustomUserService implements UserDetailsService {
 
-    @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    private PasswordEncoder encoder;
 
     @Autowired
-    private PasswordEncoder encoder;
+    public CustomUserService(UserRepository userRepository, PasswordEncoder encoder){
+        this.userRepository = userRepository;
+        this.encoder = encoder;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -15,7 +15,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long userId;
 
     @NotNull
@@ -23,6 +22,7 @@ public class User {
 
     @Email
     @NotNull
+    @Column(unique = true)
     private String email;
 
     @NotNull
