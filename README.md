@@ -37,10 +37,7 @@ The Event Management System is a comprehensive solution designed to streamline t
 
 - **Event Creation**: Easily create and customize events with detailed information
 - **User Management**: Register, authenticate, and manage user profiles
-- **Calendar Integration**: View events in an intuitive calendar interface
-- **Notification System**: Receive timely reminders and updates about upcoming events
-- **Analytics Dashboard**: Track attendance and engagement metrics
-- **Responsive Design**: Access the platform from any device
+
 
 
 ## Table of Contents
