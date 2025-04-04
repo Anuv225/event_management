@@ -80,6 +80,15 @@ npm install
 npm run dev
 ```
 
+## Backend Setup
+
+1. **Navigate to the Backend Directory**:
+    cd backend
+
+2. **Build and Run the Backend**:
+
+    ./gradlew bootRun
+
 
 
 ### Creating an Event
@@ -123,11 +132,3 @@ DELETE /api/events/:id
 
 
 
-## Backend Setup
-
-1. **Navigate to the Backend Directory**:
-    cd backend
-
-2. **Build and Run the Backend**:
-
-    ./gradlew bootRun
