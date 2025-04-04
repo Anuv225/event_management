@@ -1,7 +1,6 @@
 package com.event.backend.Dto;
 
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public class UserDto {
 
@@ -10,6 +9,9 @@ public class UserDto {
 
     @NotEmpty
     String userName;
+
+    @NotEmpty
+    String email;
 
     Boolean rsvp;
 
