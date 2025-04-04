@@ -35,7 +35,13 @@ public class CustomUserService implements UserDetailsService {
 
     public String addUser(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
+
+        if (user.getRole() == null || user.getRole().isEmpty()) {
+            user.setRole("ROLE_USER");
+        }
+
         userRepository.save(user);
         return "User Added Successfully";
     }
+
 }

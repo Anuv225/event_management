@@ -1,13 +1,17 @@
-import { useState } from 'react'
-import './App.css'
+import "./App.css";
+import { Route,Routes,Link } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
-
   return (
     <>
-      <h1 className='text-4xl'>Hello World</h1>
+      <Routes>
+        <Route path="/" element={<LoginPage/>} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
